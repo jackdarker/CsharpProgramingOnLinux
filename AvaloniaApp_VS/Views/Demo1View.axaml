@@ -1,0 +1,29 @@
+<UserControl x:Class="AvaloniaApp_VS.Views.Demo1View"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:AvaloniaApp_VS.ViewModels"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:CompileBindings="True"
+             x:DataType="vm:Demo1ViewModel"
+             mc:Ignorable="d">
+	<Design.DataContext>
+		<vm:Demo1ViewModel />
+	</Design.DataContext>
+
+	<StackPanel VerticalAlignment="Center" Spacing="5">
+		<TextBlock VerticalAlignment="Center"
+			       TextAlignment="Center"
+			       FontSize="16"
+			       FontWeight="SemiBold"
+                   Text="{Binding Title}"
+                   TextWrapping="Wrap" />
+		<TextBlock VerticalAlignment="Center"
+			       TextAlignment="Center"
+			       FontSize="16"
+                   Text="{Binding Message}"
+                   TextWrapping="Wrap" />
+	</StackPanel>
+</UserControl>
