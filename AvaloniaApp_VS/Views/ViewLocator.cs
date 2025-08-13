@@ -2,6 +2,7 @@
 using Avalonia.Controls.Templates;
 using AvaloniaApp_VS.ViewModels;
 using System;
+using static AvaloniaApp_VS.ViewModels.MainWindowViewModel;
 
 namespace AvaloniaApp_VS;
 
@@ -13,8 +14,12 @@ namespace AvaloniaApp_VS;
             {
                 return new TextBlock { Text = "data was null" };
             }
-
-            var name = data.GetType().FullName!.Replace("ViewModel", "View");
+            var name = ""; 
+            if (data is PageViewModelBase)
+            {
+                name = ((PageViewModelBase)data).View;
+            }
+            if(name=="") name=data.GetType().FullName!.Replace("ViewModel", "View");
             var type = Type.GetType(name);
 
             if (type != null)
@@ -29,6 +34,10 @@ namespace AvaloniaApp_VS;
 
         public bool Match(object? data)
         {
-            return data is ViewModelBase;
+            if(data is ViewModelBase)    
+            {   
+                return true;
+            }
+            return (false);
         }
     }

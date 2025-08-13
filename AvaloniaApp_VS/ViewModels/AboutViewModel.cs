@@ -5,7 +5,9 @@ namespace AvaloniaApp_VS.ViewModels
 {
     public class AboutViewModel : PageViewModelBase
     {
-
+        public AboutViewModel() {
+            this.View = "";
+        }
         public override bool CanNavigateNext
         {
             get => true;

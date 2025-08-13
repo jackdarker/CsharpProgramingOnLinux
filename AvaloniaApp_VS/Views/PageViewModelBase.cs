@@ -14,4 +14,6 @@ public abstract class PageViewModelBase : ViewModelBase
     /// Gets if the user can navigate to the previous page
     /// </summary>
     public abstract bool CanNavigatePrevious { get; protected set; }
+
+    public string View {  get;  set; }
 }

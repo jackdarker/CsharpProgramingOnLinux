@@ -31,6 +31,8 @@
 		<Button Click="Button_Click" IsVisible="False">Hidden</Button>
 		<Button Click="Button_Click" ClickMode="Press">Triggers on Press</Button>
 		<Button Click="Button_Click" ClickMode="Release">Triggers on Release</Button>
+		<CheckBox Click="Button_Click" IsChecked="False">Unchecked by default</CheckBox>
+		<CheckBox Click="Button_Click" IsThreeState="True" IsChecked="{x:Null}">Unknown by default</CheckBox>
 		<ToggleButton IsChecked="True" Click="Button_Click">
 			<Panel>
 				<PathIcon Classes="audio-on" Data="{StaticResource speaker_regular}" />

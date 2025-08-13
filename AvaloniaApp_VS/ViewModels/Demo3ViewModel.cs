@@ -8,6 +8,7 @@ public class Demo3ViewModel : PageViewModelBase
 {
     public Demo3ViewModel()
     {
+        this.View = "";
     }
 
     public string Message => "very basic Example of checking input fields.";

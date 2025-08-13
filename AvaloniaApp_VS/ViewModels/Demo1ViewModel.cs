@@ -9,6 +9,10 @@ namespace AvaloniaApp_VS.ViewModels;
 /// </summary>
 public class Demo1ViewModel : PageViewModelBase
 {
+    public Demo1ViewModel()
+    {
+        this.View = "";
+    }
     /// <summary>
     /// The Title of this page
     /// </summary>

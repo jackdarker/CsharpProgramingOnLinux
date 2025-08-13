@@ -11,6 +11,7 @@ public class Demo2ViewModel : PageViewModelBase
 {
     public Demo2ViewModel()
     {
+        this.View = "";
         // Listen to changes of MailAddress and Password and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.MailAddress, x => x.Password)
             .Subscribe(_ => UpdateCanNavigateNext());
