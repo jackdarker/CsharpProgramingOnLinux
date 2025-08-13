@@ -2,7 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="using:AvaloniaApp_VS.ViewModels"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+		xmlns:vm="using:AvaloniaApp_VS.ViewModels"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="250"
         x:Class="AvaloniaApp_VS.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
@@ -22,8 +23,22 @@
 
 		<StackPanel Grid.Row="0" Grid.Column="0"  Orientation="Vertical" Spacing="5"
 					HorizontalAlignment="Left">
-			<Button Command="{Binding Navigate1Command}" Content="Welcome" />
-			<Button Command="{Binding Navigate2Command}" Content="Email" />
+			<Button Command="{Binding NavigateCommand}" Content="Welcome" >
+				<Button.CommandParameter>
+					<sys:Int32>0</sys:Int32>
+				</Button.CommandParameter>
+			</Button>
+			<Button Command="{Binding NavigateCommand}" Content="Buttons" >
+				<Button.CommandParameter><sys:Int32>1</sys:Int32></Button.CommandParameter>
+			</Button>
+			<Button Command="{Binding NavigateCommand}" Content="Email">
+				<Button.CommandParameter><sys:Int32>2</sys:Int32></Button.CommandParameter>
+			</Button>
+			<Button Command="{Binding NavigateCommand}" Content="About">
+				<Button.CommandParameter>
+					<sys:Int32>99</sys:Int32>
+				</Button.CommandParameter>
+			</Button>
 		</StackPanel>
 		<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Spacing="5"
 					HorizontalAlignment="Right">

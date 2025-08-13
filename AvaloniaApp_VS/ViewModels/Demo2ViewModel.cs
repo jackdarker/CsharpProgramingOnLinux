@@ -16,6 +16,8 @@ public class Demo2ViewModel : PageViewModelBase
             .Subscribe(_ => UpdateCanNavigateNext());
     }
 
+    public string Message => "very basic Example of checking input fields.";
+
     private string? _MailAddress;
 
     /// <summary>

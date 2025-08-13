@@ -22,8 +22,8 @@ public partial class App : Application
             {
                 DataContext = new MainWindowViewModel()
             };
-            var _about = new AboutView();
-            _about.Show();
+            //var _about = new AboutView();
+            //_about.Show();
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {

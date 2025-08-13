@@ -1,12 +1,15 @@
-﻿using DynamicData;
+﻿using AvaloniaApp_VS.Views;
+using DynamicData;
 using ReactiveUI;
 using System;
+using System.Reactive;
 using System.Windows.Input;
 
 namespace AvaloniaApp_VS.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        public ReactiveCommand<int, Unit> NavigateCommand { get; }
         public MainWindowViewModel()
         {
             // Set current page to first on start up
@@ -18,15 +21,23 @@ namespace AvaloniaApp_VS.ViewModels
 
             NavigateNextCommand = ReactiveCommand.Create(NavigateNext, canNavNext);
             NavigatePreviousCommand = ReactiveCommand.Create(NavigatePrevious, canNavPrev);
-            Navigate1Command = ReactiveCommand.Create(delegate { CurrentPage = Pages[0]; }, canNavPrev);
-            Navigate2Command = ReactiveCommand.Create(delegate { CurrentPage = Pages[1]; }, canNavPrev);
+            NavigateCommand = ReactiveCommand.Create<int>(_Navigate);
         }
-
+        private void _Navigate(int page)
+        {
+            if(page==99)
+            {
+                (new AboutView()).Show();
+            }
+            else CurrentPage = Pages[page];
+        }
         // A read.only array of possible pages
         private readonly PageViewModelBase[] Pages =
         {
             new Demo1ViewModel(),
-            new Demo2ViewModel()
+            new Demo3ViewModel(),
+            new Demo2ViewModel(),
+            new AboutViewModel()
         };
 
         // The default is the first page
