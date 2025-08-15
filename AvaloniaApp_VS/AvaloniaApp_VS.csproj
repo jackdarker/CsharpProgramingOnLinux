@@ -23,5 +23,12 @@
     <Compile Update="Views\Demo1View.axaml.cs">
       <DependentUpon>Demo1View.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Demo5View.axaml.cs">
+      <DependentUpon>Demo5View.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Core\" />
   </ItemGroup>
 </Project>

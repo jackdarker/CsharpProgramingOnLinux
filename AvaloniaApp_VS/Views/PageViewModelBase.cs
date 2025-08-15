@@ -16,4 +16,8 @@ public abstract class PageViewModelBase : ViewModelBase
     public abstract bool CanNavigatePrevious { get; protected set; }
 
     public string View {  get;  set; }
+    /// <summary>
+    /// The Title of this page
+    /// </summary>
+    public string Title { get; set; }
 }

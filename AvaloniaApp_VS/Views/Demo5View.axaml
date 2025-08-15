@@ -1,0 +1,46 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaApp_VS.Views.Demo5View"
+		xmlns:local="using:AvaloniaApp_VS.Views"
+		Title="Window1">
+
+	<DockPanel LastChildFill="True">
+		<Border Height="25" Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
+			<TextBlock Foreground="Black">Dock = "Top"</TextBlock>
+		</Border>
+		<Border Height="25" Background="LemonChiffon" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom">
+			<TextBlock Foreground="Black">Dock = "Bottom"</TextBlock>
+		</Border>
+		<Border Width="200" Background="PaleGreen" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
+			
+				<ScrollViewer>
+					<StackPanel>
+						<TextBlock Foreground="Black" FontSize="22" Height="100" Background="LightBlue">Block 1</TextBlock>
+						<TextBlock FontSize="22" Height="100">Block 2</TextBlock>
+						<TextBlock Foreground="Black" FontSize="22" Height="100" Background="LightBlue">Block 3</TextBlock>
+						<TextBlock FontSize="22" Height="100">Block 4</TextBlock>
+						<TextBlock FontSize="22" Height="100" Background="LightBlue">Block 5</TextBlock>
+					</StackPanel>
+				</ScrollViewer>
+			</Border>
+
+		<Border Background="White" BorderBrush="Black" BorderThickness="1">
+			<ListBox x:Name="animals">
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="{x:Type local:Item}" >
+							<Border BorderBrush="Blue" BorderThickness="1" CornerRadius="4" Padding="4">
+							<Panel>
+								<TextBlock Text="{Binding Name}"/>
+								<Image Margin="10" Height="250" Width="200" Name="MyImage"
+									   Source="avares://AvaloniaApp_VS/Assets/mechanic.jpg"/>
+							</Panel>
+						</Border>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Border>
+	</DockPanel>
+</Window>

@@ -9,9 +9,10 @@ namespace AvaloniaApp_VS.ViewModels;
 /// </summary>
 public class Demo2ViewModel : PageViewModelBase
 {
-    public Demo2ViewModel()
+    public Demo2ViewModel(string Title, string View)
     {
-        this.View = "";
+        this.View = View;
+        this.Title = Title;
         // Listen to changes of MailAddress and Password and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.MailAddress, x => x.Password)
             .Subscribe(_ => UpdateCanNavigateNext());

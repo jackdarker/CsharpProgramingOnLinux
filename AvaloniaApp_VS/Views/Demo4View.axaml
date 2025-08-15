@@ -1,0 +1,24 @@
+<UserControl x:Class="AvaloniaApp_VS.Views.Demo4View"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:AvaloniaApp_VS.ViewModels"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:CompileBindings="True"
+             x:DataType="vm:Demo1ViewModel"
+             mc:Ignorable="d">
+	<Design.DataContext>
+		<vm:Demo1ViewModel />
+	</Design.DataContext>
+
+	<StackPanel>
+		<Button Click="Button_Click" >File System</Button>
+		<Panel>
+			<Rectangle Height="300" Width="300" Fill="LightGray"/>
+			<Image Margin="10" Height="250" Width="200" Name="MyImage"
+				   Source="avares://AvaloniaApp_VS/Assets/mechanic.jpg"/>
+		</Panel>
+	</StackPanel>
+</UserControl>

@@ -12,12 +12,14 @@ namespace AvaloniaApp_VS.ViewModels
         public ReactiveCommand<int, Unit> NavigateCommand { get; }
         public MainWindowViewModel()
         {
-            Pages = [ new Demo1ViewModel(),
-            //new Demo3ViewModel(),
-            new Demo1ViewModel(),
-            new Demo2ViewModel(),
-            new AboutViewModel()];
-            Pages[1].View = "AvaloniaApp_VS.Views.Demo3View";   //for opening Model with different view; see ViewLocator
+            string DefaultView = "";//for opening Model with different view; see ViewLocator
+            Pages = [ new Demo1ViewModel("Wizzard PAge#1",DefaultView),
+            new Demo2ViewModel("Wizzard PAge#2",DefaultView),
+            new Demo1ViewModel("Buttons","AvaloniaApp_VS.Views.Demo3View"),
+            new Demo1ViewModel("Image Loading","AvaloniaApp_VS.Views.Demo4View"),
+            new Demo1ViewModel("Dock-Window","AvaloniaApp_VS.Views.Demo5View"),
+            new AboutViewModel("About-Window",DefaultView)];
+
             // Set current page to first on start up
             _CurrentPage = Pages[0];
 
@@ -34,6 +36,10 @@ namespace AvaloniaApp_VS.ViewModels
             if(page==99)
             {
                 (new AboutView()).Show();
+            }
+            if (page == 100)
+            {
+                (new Demo5View()).Show();
             }
             else CurrentPage = Pages[page];
         }
