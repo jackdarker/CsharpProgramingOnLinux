@@ -19,6 +19,7 @@ namespace AvaloniaApp_VS.ViewModels
             new Demo1ViewModel("Image Loading","AvaloniaApp_VS.Views.Demo4View"),
             new Demo1ViewModel("Expander","AvaloniaApp_VS.Views.Demo6View"),
             new Demo1ViewModel("TabControl","AvaloniaApp_VS.Views.Demo7View"),
+            new Demo1ViewModel("Treeview","AvaloniaApp_VS.Views.Demo8View"),
             new Demo1ViewModel("Dock-Window","AvaloniaApp_VS.Views.Demo5View"),
             new AboutViewModel("About-Window",DefaultView)];
 

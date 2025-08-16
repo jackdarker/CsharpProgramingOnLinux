@@ -47,6 +47,11 @@
 					<sys:Int32>5</sys:Int32>
 				</Button.CommandParameter>
 			</Button>
+			<Button Command="{Binding NavigateCommand}" Content="Treeview">
+				<Button.CommandParameter>
+					<sys:Int32>6</sys:Int32>
+				</Button.CommandParameter>
+			</Button>
 			<Button Command="{Binding NavigateCommand}" Content="DockWindow">
 				<Button.CommandParameter>
 					<sys:Int32>100</sys:Int32>

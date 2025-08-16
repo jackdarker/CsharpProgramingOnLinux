@@ -3,6 +3,8 @@ using Avalonia.Media.Imaging;
 using AvaloniaApp_VS.Views;
 using ReactiveUI;
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive;
 
 namespace AvaloniaApp_VS.ViewModels;
@@ -12,6 +14,23 @@ namespace AvaloniaApp_VS.ViewModels;
 /// </summary>
 public class Demo1ViewModel : PageViewModelBase
 {
+
+    public class Node
+    {
+        public ObservableCollection<Node>? SubNodes { get; }
+        public string Title { get; }
+
+        public Node(string title)
+        {
+            Title = title;
+        }
+
+        public Node(string title, ObservableCollection<Node> subNodes)
+        {
+            Title = title;
+            SubNodes = subNodes;
+        }
+    }
     public Demo1ViewModel()
     {
     }
@@ -20,9 +39,34 @@ public class Demo1ViewModel : PageViewModelBase
         this.View = View;
         this.Title = Title;
         //OpenImageCmd = ReactiveCommand.Create<int>(_OpenImage);
+        SelectedNodes = new ObservableCollection<Node>();
+        Nodes = new ObservableCollection<Node>
+            {
+                new Node("Animals", new ObservableCollection<Node>
+                {
+                    new Node("Mammals", new ObservableCollection<Node>
+                    {
+                        new Node("Lion"), new Node("Cat"), new Node("Zebra")
+                    })
+                }),
+                new Node("Birds", new ObservableCollection<Node>
+                {
+                    new Node("Robin"), new Node("Condor"),
+                    new Node("Parrot"), new Node("Eagle")
+                }),
+                new Node("Insects", new ObservableCollection<Node>
+                {
+                    new Node("Locust"), new Node("House Fly"),
+                    new Node("Butterfly"), new Node("Moth")
+                }),
+            };
+
+        var moth = Nodes.Last().SubNodes?.Last();
+        if (moth != null) SelectedNodes.Add(moth);
     }
 
-
+    public ObservableCollection<Node> Nodes { get; }
+    public ObservableCollection<Node> SelectedNodes { get; }
     /// <summary>
     /// The content of this page
     /// </summary>
