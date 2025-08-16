@@ -23,6 +23,9 @@
     <Compile Update="Views\Demo1View.axaml.cs">
       <DependentUpon>Demo1View.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Demo6View.axaml.cs">
+      <DependentUpon>Demo6View.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Demo5View.axaml.cs">
       <DependentUpon>Demo5View.axaml</DependentUpon>
     </Compile>

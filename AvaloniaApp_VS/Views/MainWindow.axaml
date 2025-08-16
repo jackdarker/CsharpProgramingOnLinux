@@ -37,6 +37,16 @@
 			<Button Command="{Binding NavigateCommand}" Content="Images">
 				<Button.CommandParameter><sys:Int32>3</sys:Int32></Button.CommandParameter>
 			</Button>
+			<Button Command="{Binding NavigateCommand}" Content="Splitview">
+				<Button.CommandParameter>
+					<sys:Int32>4</sys:Int32>
+				</Button.CommandParameter>
+			</Button>
+			<Button Command="{Binding NavigateCommand}" Content="TabControl">
+				<Button.CommandParameter>
+					<sys:Int32>5</sys:Int32>
+				</Button.CommandParameter>
+			</Button>
 			<Button Command="{Binding NavigateCommand}" Content="DockWindow">
 				<Button.CommandParameter>
 					<sys:Int32>100</sys:Int32>

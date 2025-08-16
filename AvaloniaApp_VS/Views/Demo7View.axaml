@@ -1,0 +1,33 @@
+<UserControl x:Class="AvaloniaApp_VS.Views.Demo7View"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:AvaloniaApp_VS.ViewModels"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:CompileBindings="True"
+             x:DataType="vm:Demo1ViewModel"
+             mc:Ignorable="d">
+	<Design.DataContext>
+		<vm:Demo1ViewModel />
+	</Design.DataContext>
+
+	<StackPanel>
+		<TabControl Margin="5" MinHeight="200" Background="Azure">
+			<TabItem Header="Tab 1" >
+				<TextBlock Margin="5">This is tab 1 content</TextBlock>
+			</TabItem>
+			<TabItem Header="Tab 2">
+				<TextBlock Margin="5">This is tab 2 content</TextBlock>
+			</TabItem>
+		</TabControl>
+		<TextBlock Margin="5">Tabstrips is Tabcontrol without Control-Pane:</TextBlock>
+		<TabStrip SelectionChanged="TabStrip_SelectionChanged" Margin="5" >
+			<TabItem Tapped="TabItem_Tapped" Background="Orange" Foreground="Blue" Header="Tab 1"/>
+			<TabItem Tapped="TabItem_Tapped" IsSelected="False" Header="Tab 2"/>
+			<TabItem Tapped="TabItem_Tapped" IsSelected="False" Header="Tab 3"/>
+		</TabStrip>
+		<TextBlock Name="message"></TextBlock>
+	</StackPanel>
+</UserControl>

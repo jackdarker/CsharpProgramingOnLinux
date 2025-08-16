@@ -6,6 +6,7 @@ namespace AvaloniaApp_VS.ViewModels;
 
 public class Demo3ViewModel : PageViewModelBase
 {
+    public Demo3ViewModel() { }
     public Demo3ViewModel(string Title, string View)
     {
         this.View = View;

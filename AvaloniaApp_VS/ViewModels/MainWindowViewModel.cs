@@ -17,6 +17,8 @@ namespace AvaloniaApp_VS.ViewModels
             new Demo2ViewModel("Wizzard PAge#2",DefaultView),
             new Demo1ViewModel("Buttons","AvaloniaApp_VS.Views.Demo3View"),
             new Demo1ViewModel("Image Loading","AvaloniaApp_VS.Views.Demo4View"),
+            new Demo1ViewModel("Expander","AvaloniaApp_VS.Views.Demo6View"),
+            new Demo1ViewModel("TabControl","AvaloniaApp_VS.Views.Demo7View"),
             new Demo1ViewModel("Dock-Window","AvaloniaApp_VS.Views.Demo5View"),
             new AboutViewModel("About-Window",DefaultView)];
 
@@ -37,7 +39,7 @@ namespace AvaloniaApp_VS.ViewModels
             {
                 (new AboutView()).Show();
             }
-            if (page == 100)
+            else if (page == 100)
             {
                 (new Demo5View()).Show();
             }
