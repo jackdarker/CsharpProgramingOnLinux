@@ -1,0 +1,64 @@
+<UserControl x:Class="BilderalbumAva.Views.FolderView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:BilderalbumAva.ViewModels"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:CompileBindings="True"
+             x:DataType="vm:FolderViewModel"
+             mc:Ignorable="d">
+	<Design.DataContext>
+		<vm:FolderViewModel />
+	</Design.DataContext>
+	<DockPanel LastChildFill="True">
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+		<ComboBox SelectedIndex="{Binding CurrentPage}" ItemsSource="{Binding Pages}" MaxDropDownHeight="100"></ComboBox>
+			<Button  >
+				<PathIcon Data="{StaticResource chevron_left_regular}" />
+			</Button>
+			<Button  >
+				<PathIcon Data="{StaticResource chevron_right_regular}" />
+			</Button>
+		</StackPanel>
+	
+	<StackPanel Orientation="Horizontal">
+		<Border  BorderBrush="Green" BorderThickness="1" >
+			<TreeView Name="FolderTree" Margin="10"
+				  ItemsSource="{Binding Nodes}"
+				  SelectedItems="{Binding SelectedNodes}"
+				  SelectionMode="Single">
+				<TreeView.Styles>
+					<Style Selector="TreeViewItem" x:DataType="vm:Node">
+						<Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+					</Style>
+				</TreeView.Styles>
+				<TreeView.ItemTemplate >
+					<TreeDataTemplate ItemsSource="{Binding SubNodes}">
+						<Border HorizontalAlignment="Left"
+								BorderBrush="Gray" BorderThickness="1"
+								CornerRadius="5" Padding="15 3">
+							<TextBlock Text="{Binding Title}" />
+						</Border>
+					</TreeDataTemplate>
+				</TreeView.ItemTemplate>
+			</TreeView>
+		</Border>
+		<Border Background="White" BorderBrush="Blue" BorderThickness="1">
+			<ListBox ItemsSource="{Binding Items}">
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="{x:Type vm:Item}" >
+						<Border BorderBrush="Blue" BorderThickness="1" CornerRadius="4" Padding="0">
+							<Panel>
+								<TextBlock Text="{Binding Name}"  VerticalAlignment="Bottom" TextAlignment="Center" ZIndex="1"/>
+								<Image Margin="0,0,0,20" Height="250" Width="200" Name="MyImage"  />
+							</Panel>
+						</Border>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Border>
+		</StackPanel>
+	</DockPanel>
+</UserControl>

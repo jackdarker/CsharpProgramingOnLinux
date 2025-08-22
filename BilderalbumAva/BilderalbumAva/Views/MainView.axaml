@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BilderalbumAva.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BilderalbumAva.Views.MainView"
+             x:DataType="vm:MainViewModel"
+			 xmlns:cc="using:BilderalbumAva.Views">
+	<Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+	<DockPanel LastChildFill="True">
+		<Border  Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
+			<TextBlock Text="Menu" />
+		</Border>
+		<Border  Background="SkyBlue" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
+			<cc:FolderView Height="200" Width="300"></cc:FolderView>
+		</Border>
+		<!--Grid Name="MyGrid" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto" RowDefinitions="Auto"  Margin="4" ShowGridLines="True"-->
+		<StackPanel Name="MyGrid" Orientation="Horizontal">
+			
+			<Button  Name="Bt_Add" Click="Button_AddPane" Content="Add"/>
+		</StackPanel>
+
+	</DockPanel>
+
+</UserControl>
