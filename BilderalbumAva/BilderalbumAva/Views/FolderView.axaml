@@ -15,7 +15,7 @@
 	<DockPanel LastChildFill="True">
 		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
 		<ComboBox SelectedIndex="{Binding CurrentPage}" ItemsSource="{Binding Pages}" MaxDropDownHeight="100"></ComboBox>
-			<Button  >
+			<Button  Command="{Binding PageRefreshCommand}">
 				<PathIcon Data="{StaticResource chevron_left_regular}" />
 			</Button>
 			<Button  >

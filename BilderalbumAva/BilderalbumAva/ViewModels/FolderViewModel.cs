@@ -4,8 +4,11 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reactive;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -85,8 +88,6 @@ namespace BilderalbumAva.ViewModels
     }
     public class FolderViewModel : ViewModelBase
     {
-
-        
         public FolderViewModel()
         {
             //OpenImageCmd = ReactiveCommand.Create<int>(_OpenImage);
@@ -99,8 +100,19 @@ namespace BilderalbumAva.ViewModels
             Items.AddRange( [new Item("cat",""), new Item("camel",""), new Item("cow",""), new Item("chameleon","") ]);
             Pages = new ObservableCollection<string>();
             Pages.AddRange(["Page 1"]);
-        }
+            PageRefreshCommand = ReactiveCommand.Create(_RefreshPage);
+            this.WhenAnyValue(x => x.CurrentPage).Where(x => (x >= 0)).InvokeCommand(PageRefreshCommand);
+            this.WhenAnyValue(x => x.SelectedNodes)
+                .Where(x=>(x.Count>0)).InvokeCommand(PageRefreshCommand);
+            //.Where(x => (x>=0))
+            //.Throttle(TimeSpan.FromSeconds(.25))
 
+        }
+        public ReactiveCommand<Unit, Unit> PageRefreshCommand { get; }
+        private void _RefreshPage()
+        {
+            ;
+        }
         public ObservableCollection<Node> Nodes { get; }
         public ObservableCollection<Node> SelectedNodes { get; }
 
