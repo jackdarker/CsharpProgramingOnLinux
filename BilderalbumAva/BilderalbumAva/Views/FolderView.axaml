@@ -25,6 +25,15 @@
 			<Button  >
 				<PathIcon Data="{StaticResource chevron_right_regular}" />
 			</Button>
+			<ListBox ItemsSource="{Binding SelectedFolders}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="{Binding Tag.FullName}" Margin="0,0,10,0"/>
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
 		</StackPanel>
 	
 	<StackPanel Orientation="Horizontal">

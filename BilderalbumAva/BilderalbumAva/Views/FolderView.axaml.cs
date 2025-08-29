@@ -15,7 +15,6 @@ public partial class FolderView : ReactiveUserControl<FolderViewModel>
     {
         this.WhenActivated(disposables => { /* Handle view activation etc. */ });
         InitializeComponent();
-
     }
 
 }

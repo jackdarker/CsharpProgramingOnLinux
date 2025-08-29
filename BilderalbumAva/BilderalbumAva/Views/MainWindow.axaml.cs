@@ -18,7 +18,6 @@ public partial class MainWindow : Window
     {
         var _i = MyGrid.Children.Count;
         var tb1 = new FolderViewModel();
-        tb1.CurrentPath = "D:";
         var _con = new ContentControl();
         _con.Content = tb1;
         MyGrid.Children.Insert(_i - 1, _con);

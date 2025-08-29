@@ -1,5 +1,9 @@
-﻿using Avalonia.Media.Imaging;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform.Storage;
 using DynamicData;
+using DynamicData.Binding;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -10,6 +14,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.XPath;
@@ -102,7 +107,6 @@ namespace BilderalbumAva.ViewModels
         public ViewModelActivator Activator { get; }
         public FolderViewModel()
         {
-            //OpenImageCmd = ReactiveCommand.Create<int>(_OpenImage);
             SelectedFolders = new ObservableCollection<Node>();
             Folders = new ObservableCollection<Node>{
                 new Node("Root",new ObservableCollection<Node>{ new Node("???")
@@ -118,22 +122,44 @@ namespace BilderalbumAva.ViewModels
             this.WhenActivated((CompositeDisposable disposables) =>
             {
                 this.WhenAnyValue(x => x.CurrentPage).Where(x => (x >= 0)).InvokeCommand(PageRefreshCommand);
-                this.WhenAnyValue(x => x.SelectedFolders)//[0].Tag)
+                this.WhenAnyValue(x => x.CurrentPath).Where(x => (x != null && x.Exists)).Select(items => -1).InvokeCommand(PageRefreshCommand);
+                /*this.WhenAnyValue(x => x.SelectedFolders)//[0].Tag)
                     .Where(x => (x != null))
                     .
-                    .InvokeCommand(FolderChangeCommand);
+                    .InvokeCommand(FolderChangeCommand);*/
                 //this.SelectedFolders.CollectionChanged += SelectedFolders_CollectionChanged;
+                this.SelectedFolders
+                    // Convert the collection to a stream of chunks,
+                    // so we have IObservable<IChangeSet<TKey, TValue>>
+                    // type also known as the DynamicData monad.
+                    .ToObservableChangeSet(x => x)
+                    // Each time the collection changes, we get
+                    // all updated items at once.
+                    .ToCollection()
+                    .Where(wheremethod)
+                    .Select(selectMethod)
+                    .BindTo(this, x => x.CurrentPath);
+                    //.ToProperty(this, x => x.CurrentPath);
+                //.Select(items => Unit.Default)
+                //.InvokeCommand(FolderChangeCommand);
+
                 /* handle activation TODO */
                 Disposable
                     .Create(() => { /* handle deactivation */ })
                     .DisposeWith(disposables);
             });
-            
-            //.Where(x => (x>=0))
-            //.Throttle(TimeSpan.FromSeconds(.25))
-
+        
         }
 
+        private static DirectoryInfo selectMethod( IReadOnlyCollection<Node> items)
+        {
+            return (items.Last().Tag);
+        }
+
+        private static bool wheremethod(IReadOnlyCollection<Node> items)
+        {
+            return (items.Any());
+        }
         private void SelectedFolders_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //FolderChangeCommand.Execute();
@@ -149,13 +175,13 @@ namespace BilderalbumAva.ViewModels
         public ObservableCollection<Item> Items { get; }
         public ObservableCollection<String> Pages { get; }
 
-        private string? _currentPath;
-        public string? CurrentPath
+        private DirectoryInfo? _currentPath;
+        public DirectoryInfo? CurrentPath
         {
             get { return _currentPath; }
             set { this.RaiseAndSetIfChanged(ref _currentPath, value); }
         }
-        private int _currentPage = -1;
+        private int _currentPage = 0;
         public int CurrentPage
         {
             get { return _currentPage; }
@@ -170,7 +196,7 @@ namespace BilderalbumAva.ViewModels
         private void _RefreshPage(int ActiveIndex)    //#hack: this is bound to CurrentPage but also button up/down and so we need some INT for direction
         {
             ;
-            m_FilesInDirectory = GetImagesInDirectory(SelectedFolders[0].Tag).Length; //
+            m_FilesInDirectory = GetImagesInDirectory(CurrentPath).Length; //
             int _SelectedPage = CurrentPage;
             int _CurrPageCount = Pages.Count;
             int _NewPageCount = (m_FilesInDirectory / ITEMSPERPAGE) +
@@ -208,11 +234,12 @@ namespace BilderalbumAva.ViewModels
             {
                 CurrentPage = Math.Min(ActiveIndex, Pages.Count - 1);
             }
-            //if (_ManualUpdate) toolStripPages_SelectedIndexChanged(null, null);    //if neither index nor text changed, trigger manually
+            //if (_ManualUpdate) 
+                _RefreshItems();    //if neither index nor text changed, trigger manually
         }
         private void _RefreshItems()
         {
-            DirectoryInfo Dir = SelectedFolders[0].Tag;
+            DirectoryInfo Dir = CurrentPath;
             int Page = CurrentPage;
             if (m_PreviousDirectory != Dir || m_PreviousPage != Page)
             {//dont delete & recreate images if directory not changed
@@ -296,6 +323,19 @@ namespace BilderalbumAva.ViewModels
                 }
             }
             return Files;
+        }
+        private async void CreateThumb(FileInfo file)
+        {
+            var topLevel = TopLevel.GetTopLevel(this);
+            var _file = await topLevel.StorageProvider.TryGetFileFromPathAsync(file.FullName);
+
+                    // Open reading stream from the first file.
+                    await using var stream = await _file.OpenReadAsync();
+                using var streamReader = new StreamReader(stream);
+                // Reads all the content of file as a text.
+                //var fileContent = await streamReader.ReadToEndAsync();
+                MyImage.Source = new Bitmap(streamReader.BaseStream);
+            }
         }
     }
     }
