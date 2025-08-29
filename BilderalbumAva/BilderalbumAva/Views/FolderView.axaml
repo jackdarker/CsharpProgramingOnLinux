@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:vm="using:BilderalbumAva.ViewModels"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -16,6 +17,9 @@
 		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
 		<ComboBox SelectedIndex="{Binding CurrentPage}" ItemsSource="{Binding Pages}" MaxDropDownHeight="100"></ComboBox>
 			<Button  Command="{Binding PageRefreshCommand}">
+				<Button.CommandParameter>
+					<sys:Int32>-1</sys:Int32>
+				</Button.CommandParameter>
 				<PathIcon Data="{StaticResource chevron_left_regular}" />
 			</Button>
 			<Button  >
@@ -26,8 +30,8 @@
 	<StackPanel Orientation="Horizontal">
 		<Border  BorderBrush="Green" BorderThickness="1" >
 			<TreeView Name="FolderTree" Margin="10"
-				  ItemsSource="{Binding Nodes}"
-				  SelectedItems="{Binding SelectedNodes}"
+				  ItemsSource="{Binding Folders}"
+				  SelectedItems="{Binding SelectedFolders}"
 				  SelectionMode="Single">
 				<TreeView.Styles>
 					<Style Selector="TreeViewItem" x:DataType="vm:Node">
@@ -35,7 +39,7 @@
 					</Style>
 				</TreeView.Styles>
 				<TreeView.ItemTemplate >
-					<TreeDataTemplate ItemsSource="{Binding SubNodes}">
+					<TreeDataTemplate ItemsSource="{Binding SubFolders}">
 						<Border HorizontalAlignment="Left"
 								BorderBrush="Gray" BorderThickness="1"
 								CornerRadius="5" Padding="15 3">
